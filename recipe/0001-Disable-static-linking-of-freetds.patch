@@ -1,0 +1,25 @@
+From 3830cd0a0571ffd5fc342b561c43178a95c565a9 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Tue, 28 Aug 2018 23:38:25 -0500
+Subject: [PATCH] Disable static linking of freetds
+
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index f77b4ae..b73d98d 100755
+--- a/setup.py
++++ b/setup.py
+@@ -58,7 +58,7 @@ else:
+ 
+ from setuptools.command.test import test as TestCommand
+ 
+-LINK_FREETDS_STATICALLY = True
++LINK_FREETDS_STATICALLY = False
+ LINK_OPENSSL = False
+ 
+ ROOT = osp.abspath(osp.dirname(__file__))
+-- 
+2.17.0
+
