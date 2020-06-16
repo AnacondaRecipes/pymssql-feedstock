@@ -12,6 +12,7 @@ source:
   sha256: {{ sha256 }}
   patches:
     - 0001-Disable-static-linking-of-freetds.patch
+    - python_38_fix.patch
 
 build:
   number: 0
@@ -23,6 +24,8 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - patch               # [not win]
+    - m2-patch            # [win]
   host:
     - python
     - setuptools
@@ -31,6 +34,7 @@ requirements:
     - setuptools-git
   run:
     - python
+    - freetds
 
 test:
   imports:
