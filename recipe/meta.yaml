@@ -13,6 +13,7 @@ source:
   patches:
     - 0001-Disable-static-linking-of-freetds.patch
     - python_38_fix.patch
+    - rm_linux_distribution.patch
 
 build:
   number: 0
