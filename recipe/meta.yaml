@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
   patches:
     # - 0001-Disable-static-linking-of-freetds.patch
-    - python_38_fix.patch
+    # - python_38_fix.patch
     - rm_linux_distribution.patch
 
 build:
