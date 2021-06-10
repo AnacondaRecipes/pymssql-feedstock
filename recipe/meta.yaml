@@ -28,18 +28,25 @@ requirements:
     - patch               # [not win]
     - m2-patch            # [win]
   host:
-    - python
-    - setuptools
-    - cython
+    - python >=3.6
+    - pip
+    - setuptools >=54.0
+    - setuptools_scm >=5.0
+    - cython >=0.29.22
     - freetds
     - setuptools-git
+    - wheel
   run:
-    - python
+    - python >=3.6
     - freetds
 
 test:
   imports:
     - pymssql
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
     dev_url: https://github.com/pymssql/pymssql
@@ -47,6 +54,7 @@ about:
     home: http://pymssql.org
     license: LGPL
     license_family: LGPL
+    license_file: LICENSE
     summary: DB-API interface to Microsoft SQL Server for Python. (new Cython-based
         version)
 
