@@ -30,9 +30,9 @@ requirements:
   host:
     - python >=3.6
     - pip
-    - setuptools >=54.0
-    - setuptools_scm >=5.0
-    - cython >=0.29.22
+    - setuptools
+    - setuptools_scm
+    - cython
     - freetds
     - setuptools-git
     - wheel
