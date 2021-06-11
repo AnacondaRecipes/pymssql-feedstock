@@ -11,9 +11,11 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-    - 0001-Disable-static-linking-of-freetds.patch
-    - python_38_fix.patch
-    - rm_linux_distribution.patch
+    # 6/11/2021: Static linking was fixed in v2.2.0 https://github.com/pymssql/pymssql/commit/263b6a02ac2528e1951908ea19f397acd1cc4859
+    #- 0001-Disable-static-linking-of-freetds.patch
+    # python_38 issue was fixed in v2.1.5
+    #- python_38_fix.patch
+    #- rm_linux_distribution.patch
 
 build:
   number: 0
