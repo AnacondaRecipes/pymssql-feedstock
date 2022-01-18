@@ -1,0 +1,13 @@
+diff --git a/setup.py b/setup.py
+index 95a3cb8..3bf9b62 100644
+--- a/setup.py
++++ b/setup.py
+@@ -103,6 +103,8 @@ if not WINDOWS:
+     # check for clock_gettime, link with librt for glibc<2.17
+     from dev import ccompiler
+     compiler = ccompiler.new_compiler()
++    from distutils.sysconfig import customize_compiler
++    customize_compiler(compiler)
+     if not compiler.has_function('clock_gettime(0,NULL)', includes=['time.h']):
+         if compiler.has_function('clock_gettime(0,NULL)', includes=['time.h'], libraries=['rt']):
+             libraries.append('rt')

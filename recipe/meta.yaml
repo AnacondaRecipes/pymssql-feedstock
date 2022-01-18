@@ -11,13 +11,13 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-    - 0001-Disable-static-linking-of-freetds.patch
-    - python_38_fix.patch
-    - rm_linux_distribution.patch
+    - patches/0002-customize_compiler.patch
 
 build:
   number: 0
   script:
+    - export LINK_FREETDS_STATICALLY=NO   # [unix]
+    - set LINK_FREETDS_STATICALLY=NO      # [win]
     - python setup.py build_ext --include-dirs=%PREFIX%\include --library-dirs=%PREFIX%\lib  # [win]
     - python setup.py build_ext --include-dirs=$PREFIX/include --library-dirs=$PREFIX/lib    # [not win]
     - python setup.py install --single-version-externally-managed --record record.txt
@@ -29,10 +29,11 @@ requirements:
     - m2-patch            # [win]
   host:
     - python
-    - setuptools
+    - pip
     - cython
     - freetds
     - setuptools-git
+    - setuptools_scm
   run:
     - python
     - freetds
