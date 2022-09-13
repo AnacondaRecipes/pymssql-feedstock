@@ -1,7 +1,7 @@
 {% set name = "pymssql" %}
-{% set version = "2.2.3" %}
-{% set sha256 = "b94fddc6d5f168205d14294d36969025967ff1837adcc1664c19968de61dca80" %}
-{% set build = "1" %}
+{% set version = "2.2.5" %}
+{% set sha256 = "857411c308ecb584a3ca633be30f1971d2a8cc0bcd978709b1abf96ff43767ad" %}
+{% set build = "0" %}
 
 package:
   name: {{ name|lower }}
@@ -57,7 +57,7 @@ about:
     dev_url: https://github.com/pymssql/pymssql
     doc_url: http://www.pymssql.org/en/stable/
     home: http://pymssql.org
-    license: LGPL-2.1-or-later
+    license: LGPL-2.1-only
     license_family: LGPL
     summary: DB-API interface to Microsoft SQL Server for Python. (new Cython-based
         version)
