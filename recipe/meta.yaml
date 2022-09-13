@@ -55,8 +55,8 @@ test:
 
 about:
     dev_url: https://github.com/pymssql/pymssql
-    doc_url: http://www.pymssql.org/en/stable/
-    home: http://pymssql.org
+    doc_url: https://www.pymssql.org/en/stable/
+    home: https://pymssql.org
     license: LGPL-2.1-only
     license_family: LGPL
     summary: DB-API interface to Microsoft SQL Server for Python. (new Cython-based
