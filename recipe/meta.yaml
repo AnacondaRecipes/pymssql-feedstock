@@ -1,7 +1,7 @@
 {% set name = "pymssql" %}
 {% set version = "2.2.5" %}
 {% set sha256 = "857411c308ecb584a3ca633be30f1971d2a8cc0bcd978709b1abf96ff43767ad" %}
-{% set build = "0" %}
+{% set build = 1 %}
 
 package:
   name: {{ name|lower }}
@@ -20,9 +20,7 @@ build:
   script:
     - export LINK_FREETDS_STATICALLY=NO   # [unix]
     - set LINK_FREETDS_STATICALLY=NO      # [win]
-    - python setup.py build_ext --include-dirs=%PREFIX%\include --library-dirs=%PREFIX%\lib  # [win]
-    - python setup.py build_ext --include-dirs=$PREFIX/include --library-dirs=$PREFIX/lib    # [not win]
-    - python setup.py install --single-version-externally-managed --record record.txt
+    - pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   build:
