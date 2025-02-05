@@ -22,6 +22,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - cython >=3.0.10
   host:
     - python
     - cython >=3.0.10
@@ -32,11 +33,9 @@ requirements:
     - setuptools_scm >=5.0
     - toml
     - wheel >=0.36.2
-    - unixodbc
   run:
     - python
     - freetds
-    - unixodbc
 
 test:
   imports:
