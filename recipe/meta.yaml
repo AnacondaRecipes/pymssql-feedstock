@@ -1,6 +1,5 @@
 {% set name = "pymssql" %}
 {% set version = "2.3.2" %}
-{% set sha256 = "18089641b687be1ebd0f64f0d1ff977478a397ffa1af372bdf10dbec29cf6d2e" %}
 
 package:
   name: {{ name|lower }}
@@ -9,7 +8,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 18089641b687be1ebd0f64f0d1ff977478a397ffa1af372bdf10dbec29cf6d2e
   patches:
     # - patches/0002-customize_compiler.patch
 
@@ -19,9 +18,7 @@ build:
   script:
     - export LINK_FREETDS_STATICALLY=NO   # [unix]
     - set LINK_FREETDS_STATICALLY=NO      # [win]
-    - python setup.py build_ext --include-dirs=%PREFIX%\include --library-dirs=%PREFIX%\lib  # [win]
-    - python setup.py build_ext --include-dirs=$PREFIX/include --library-dirs=$PREFIX/lib    # [not win]
-    - python setup.py install --single-version-externally-managed --record record.txt
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
