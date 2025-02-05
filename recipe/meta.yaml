@@ -11,7 +11,7 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-    - patches/0002-customize_compiler.patch
+    # - patches/0002-customize_compiler.patch
 
 build:
   number: 0
@@ -26,11 +26,11 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - patch               # [not win]
-    - m2-patch            # [win]
+    # - patch               # [not win]
+    # - m2-patch            # [win]
   host:
     - python
-    - cython >=0.29.22
+    - cython >=3.0.10
     - freetds
     - pip
     - setuptools >=54.0
