@@ -14,20 +14,15 @@ build:
   number: 0
   skip: True  # [py<37]
   script:
-    - export CC=$BUILD_PREFIX/bin/x86_64-conda-linux-gnu-cc  # [linux]
-    - export CXX=$BUILD_PREFIX/bin/x86_64-conda-linux-gnu-c++  # [linux]
-    - export PATH=$BUILD_PREFIX/bin:$PATH  # [linux]
-    - export CFLAGS="-I$PREFIX/include"  # [linux]
-    - export LDFLAGS="-L$PREFIX/lib"  # [linux]
     - export LINK_FREETDS_STATICALLY=NO   # [unix]
     - set LINK_FREETDS_STATICALLY=NO      # [win]
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --global-option=build_ext --global-option="--include-dirs=$PREFIX/include" --global-option="--library-dirs=$PREFIX/lib"  # [unix]
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --global-option=build_ext --global-option="--include-dirs=%PREFIX%/include" --global-option="--library-dirs=%PREFIX%/lib"  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cython >=3.0.10
   host:
     - python
     - cython >=3.0.10
