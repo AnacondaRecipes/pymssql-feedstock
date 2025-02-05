@@ -16,8 +16,7 @@ build:
   script:
     - export LINK_FREETDS_STATICALLY=NO   # [unix]
     - set LINK_FREETDS_STATICALLY=NO      # [win]
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --global-option=build_ext --global-option="--include-dirs=$PREFIX/include" --global-option="--library-dirs=$PREFIX/lib"  # [unix]
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --global-option=build_ext --global-option="--include-dirs=%PREFIX%/include" --global-option="--library-dirs=%PREFIX%/lib"  # [win]
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
