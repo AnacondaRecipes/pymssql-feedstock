@@ -16,6 +16,8 @@ build:
   number: 0
   skip: True  # [py<37]
   script:
+    - export LINK_FREETDS_STATICALLY=NO   # [unix]
+    - set LINK_FREETDS_STATICALLY=NO      # [win]
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -35,6 +37,7 @@ requirements:
     - wheel >=0.36.2
   run:
     - python
+    - freetds
 
 test:
   imports:
