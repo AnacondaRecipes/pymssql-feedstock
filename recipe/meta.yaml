@@ -9,8 +9,6 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 18089641b687be1ebd0f64f0d1ff977478a397ffa1af372bdf10dbec29cf6d2e
-  patches:
-    # - patches/0002-customize_compiler.patch
 
 build:
   number: 0
@@ -23,8 +21,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    # - patch               # [not win]
-    # - m2-patch            # [win]
+    - {{ compiler('cxx') }}
   host:
     - python
     - cython >=3.0.10
