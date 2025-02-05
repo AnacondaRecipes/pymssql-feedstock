@@ -14,16 +14,9 @@ build:
   number: 0
   skip: True  # [py<37]
   script:
-  # Set compiler paths for Linux
-  - export CC=$BUILD_PREFIX/bin/x86_64-conda-linux-gnu-cc  # [linux]
-  - export CXX=$BUILD_PREFIX/bin/x86_64-conda-linux-gnu-c++  # [linux]
-  - export PATH=$BUILD_PREFIX/bin:$PATH  # [linux]
-  - export CFLAGS="-I$PREFIX/include"  # [linux]
-  - export LDFLAGS="-L$PREFIX/lib"  # [linux]
-  # Set environment variables for FreeTDS
-  - export LINK_FREETDS_STATICALLY=NO  # [unix]
-  - set LINK_FREETDS_STATICALLY=NO  # [win]
-  - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - export LINK_FREETDS_STATICALLY=NO   # [unix]
+    - set LINK_FREETDS_STATICALLY=NO      # [win]
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
