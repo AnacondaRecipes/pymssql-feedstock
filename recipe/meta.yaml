@@ -19,9 +19,7 @@ build:
   script:
     - export LINK_FREETDS_STATICALLY=NO   # [unix]
     - set LINK_FREETDS_STATICALLY=NO      # [win]
-    - python setup.py build_ext --include-dirs=%PREFIX%\include --library-dirs=%PREFIX%\lib  # [win]
-    - python setup.py build_ext --include-dirs=$PREFIX/include --library-dirs=$PREFIX/lib    # [not win]
-    - python setup.py install --single-version-externally-managed --record record.txt
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
@@ -58,8 +56,12 @@ about:
     home: https://pymssql.org
     license: LGPL-2.1-only
     license_family: LGPL
+    license_file: LICENSE
     summary: DB-API interface to Microsoft SQL Server for Python. (new Cython-based
         version)
+    description: |
+      A simple database interface for Python that builds on top of FreeTDS to provide a Python DB-API (PEP-249) interface to Microsoft SQL Server.
+      The wheels of pymssql are built against the latest release of FreeTDS and could be found on PyPI Project.
 
 extra:
   recipe-maintainers:
