@@ -1,5 +1,6 @@
 {% set name = "pymssql" %}
 {% set version = "2.3.2" %}
+{% set sha256 = "18089641b687be1ebd0f64f0d1ff977478a397ffa1af372bdf10dbec29cf6d2e" %}
 
 package:
   name: {{ name|lower }}
@@ -8,23 +9,28 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 18089641b687be1ebd0f64f0d1ff977478a397ffa1af372bdf10dbec29cf6d2e
+  sha256: {{ sha256 }}
+  patches:
+    - patches/0002-customize_compiler.patch
 
 build:
   number: 0
-  skip: True  # [py<37]
+  skip: True  # [py<36]
   script:
     - export LINK_FREETDS_STATICALLY=NO   # [unix]
     - set LINK_FREETDS_STATICALLY=NO      # [win]
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - python setup.py build_ext --include-dirs=%PREFIX%\include --library-dirs=%PREFIX%\lib  # [win]
+    - python setup.py build_ext --include-dirs=$PREFIX/include --library-dirs=$PREFIX/lib    # [not win]
+    - python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - patch               # [not win]
+    - m2-patch            # [win]
   host:
     - python
-    - cython >=3.0.10
+    - cython >=0.29.22
     - freetds
     - pip
     - setuptools >=54.0
@@ -35,6 +41,8 @@ requirements:
   run:
     - python
     - freetds
+  run_constrained:                                             # [osx and x86_64]
+    - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.12") }}  # [osx and x86_64]
 
 test:
   imports:
