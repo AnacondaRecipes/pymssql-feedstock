@@ -5,16 +5,17 @@ settings get customized to point to the sysconfig data. This is where it would
 normally update to our compilers and flags. So, we need to call this method to
 ensure that the function check is using the conda compiler and sysroot.
 
-diff --git a/setup.py b/setup.py
-index 95a3cb8..3bf9b62 100644
---- a/setup.py
-+++ b/setup.py
-@@ -103,6 +103,8 @@ if not WINDOWS:
-     # check for clock_gettime, link with librt for glibc<2.17
-     from dev import ccompiler
-     compiler = ccompiler.new_compiler()
+diff -ruN pymssql-2.3.0/dev/ccompiler.py pymssql-2.3.0-patch/dev/ccompiler.py
+--- pymssql-2.3.0/dev/ccompiler.py	2024-04-07 01:24:55.000000000 +0200
++++ pymssql-2.3.0-patch/dev/ccompiler.py	2024-06-27 15:27:24.967290046 +0200
+@@ -113,7 +113,10 @@
+     """
+         check for clock_gettime, link with librt for glibc<2.17
+     """
 +    from distutils.sysconfig import customize_compiler
++
+     compiler = new_compiler()
 +    customize_compiler(compiler)
-     if not compiler.has_function('clock_gettime(0,NULL)', includes=['time.h']):
-         if compiler.has_function('clock_gettime(0,NULL)', includes=['time.h'], libraries=['rt']):
-             libraries.append('rt')
+     try:
+         if not compiler.has_function('clock_gettime(0,NULL)', includes=['time.h']):
+             if compiler.has_function('clock_gettime(0,NULL)', includes=['time.h'], libraries=['rt']):
