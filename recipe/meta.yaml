@@ -30,7 +30,7 @@ requirements:
     - m2-patch            # [win]
   host:
     - python
-    - cython >=0.29.22
+    - cython >=3.0.7
     - freetds
     - pip
     - setuptools >=54.0
