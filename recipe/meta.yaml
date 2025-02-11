@@ -28,13 +28,13 @@ requirements:
     - m2-patch            # [win]
   host:
     - python
-    - cython >=3.0.7
+    - cython >=3.0.10
     - freetds
     - pip
     - setuptools >=54.0
     - setuptools-git
     - setuptools_scm >=5.0
-    - toml
+    - tomli
     - wheel >=0.36.2
   run:
     - python
