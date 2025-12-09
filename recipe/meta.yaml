@@ -1,6 +1,6 @@
 {% set name = "pymssql" %}
-{% set version = "2.3.2" %}
-{% set sha256 = "18089641b687be1ebd0f64f0d1ff977478a397ffa1af372bdf10dbec29cf6d2e" %}
+{% set version = "2.3.10" %}
+{% set sha256 = "4e86c28fa71a66da3a89584b16b69dec09fed97feadb7eaf487c70493653fc63" %}
 
 package:
   name: {{ name|lower }}
@@ -8,38 +8,41 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
     - patches/0002-customize_compiler.patch
 
 build:
   number: 0
-  skip: True  # [py<36]
+  skip: true  # [py<39]
   script:
-    - export LINK_FREETDS_STATICALLY=NO   # [unix]
-    - set LINK_FREETDS_STATICALLY=NO      # [win]
+    - export LINK_FREETDS_STATICALLY=NO  # [unix]
+    - set LINK_FREETDS_STATICALLY=NO  # [win]
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - patch               # [not win]
-    - m2-patch            # [win]
+    - patch  # [not win]
+    - m2-patch  # [win]
   host:
     - python
-    - cython >=3.0.10
+    - cython >=3.1.0
     - freetds
     - pip
-    - setuptools >=54.0
+    - setuptools >80.0
     - setuptools-git
     - setuptools_scm >=5.0
     - tomli
     - wheel >=0.36.2
+    - packaging >=24.2
+    - setuptools-scm >=8.0
+    - standard-distutils  # [py>=312]
   run:
     - python
     - freetds
-  run_constrained:                                             # [osx and x86_64]
+  run_constrained:  # [osx and x86_64]
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.12") }}  # [osx and x86_64]
 
 test:
@@ -51,17 +54,20 @@ test:
     - pip check
 
 about:
-    dev_url: https://github.com/pymssql/pymssql
-    doc_url: https://www.pymssql.org/en/stable/
-    home: https://pymssql.org
-    license: LGPL-2.1-only
-    license_family: LGPL
-    license_file: LICENSE
-    summary: DB-API interface to Microsoft SQL Server for Python. (new Cython-based
-        version)
-    description: |
-      A simple database interface for Python that builds on top of FreeTDS to provide a Python DB-API (PEP-249) interface to Microsoft SQL Server.
-      The wheels of pymssql are built against the latest release of FreeTDS and could be found on PyPI Project.
+  dev_url: https://github.com/pymssql/pymssql
+  doc_url: https://www.pymssql.org/en/stable/
+  home: https://pymssql.org
+  license: LGPL-2.1-only
+  license_family: LGPL
+  license_file: LICENSE
+  summary:
+    - DB-API interface to Microsoft SQL Server for Python. (new Cython-based
+    - version)
+  description: |
+    A simple database interface for Python that builds on top of FreeTDS to provide a Python DB-API (PEP-249) interface to Microsoft SQL Server.
+    The wheels of pymssql are built against the latest release of FreeTDS and could be found on PyPI Project.
+
+
 
 extra:
   recipe-maintainers:
