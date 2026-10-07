@@ -14,8 +14,8 @@ source:
 build:
   number: 0
   script:
-    - export LINK_FREETDS_STATICALLY=NO  # [unix]
-    - set LINK_FREETDS_STATICALLY=NO  # [win]
+    - export LINK_FREETDS_STATICALLY=NO   # [unix]
+    - set LINK_FREETDS_STATICALLY=NO      # [win]
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: true  # [py<39]
 
@@ -32,7 +32,7 @@ requirements:
     - wheel >=0.36.2
     - cython >=3.1.0
     - tomli
-    - freetds
+    - freetds {{ freetds }}
     - standard-distutils  # [py>=312]
   run:
     - python
@@ -45,7 +45,7 @@ test:
     - pymssql
   commands:
     - pip check
-    - pytest -v tests
+    - pytest -vv tests
   requires:
     - pip
     - pytest
@@ -63,16 +63,6 @@ about:
   description: |
     A simple database interface for Python that builds on top of FreeTDS to provide a Python DB-API (PEP-249) interface to Microsoft SQL Server.
     The wheels of pymssql are built against the latest release of FreeTDS and could be found on PyPI Project.
-
-
-
-
-
-
-
-
-
-
 
 extra:
   recipe-maintainers:
