@@ -33,7 +33,6 @@ requirements:
     - cython >=3.1.0
     - tomli
     - freetds {{ freetds }}
-    - standard-distutils  # [py>=312]
   run:
     - python
     - freetds
